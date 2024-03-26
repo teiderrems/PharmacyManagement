@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PharmacyManagement.DTO;
 using PharmacyManagement.Interfaces;
 using PharmacyManagement.Models;
 
@@ -19,9 +20,9 @@ namespace PharmacyManagement.Controllers
         }
 
         [HttpGet]
-        public async Task<IList<Categorie>> Get()
+        public async Task<IList<Categorie>> Get([FromQuery]DtoPagination? pagination)
         {
-            return await _storeManager.FindAsync();
+            return await _storeManager.FindAsync(pagination);
         }
 
         [HttpGet]
