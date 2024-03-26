@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PharmacyManagement.Data;
+using PharmacyManagement.DTO;
 using PharmacyManagement.Interfaces;
 using PharmacyManagement.Models;
 
@@ -47,9 +48,19 @@ namespace PharmacyManagement.Services
             }
         }
 
-        public async Task<IList<Order>> FindAsync()
+        public async Task<IList<Order>> FindAsync(DtoPagination? pagination)
         {
-            return await _context.Orders.ToListAsync();
+            if (pagination == null)
+            {
+                pagination = new()
+                {
+                    Limit = 20,
+                    Page = 0
+                };
+            }
+            int skip = pagination.Limit * pagination.Page;
+            return await _context.Orders.Take(pagination.Limit).Skip(skip)
+                .ToListAsync();
         }
 
         public async Task<Order> FindByIdAsync(int id)

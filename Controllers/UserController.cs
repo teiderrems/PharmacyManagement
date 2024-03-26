@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PharmacyManagement.DTO;
 using PharmacyManagement.Interfaces;
 using PharmacyManagement.Models;
 
@@ -6,7 +7,7 @@ namespace PharmacyManagement.Controllers
 {
 
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/admin/[controller]")]
     public class UserController:ControllerBase
     {
         private readonly IUserRepository _userRepository;
@@ -18,9 +19,9 @@ namespace PharmacyManagement.Controllers
 
 
         [HttpGet]
-        public async Task<IEnumerable<ApplicationUser>> FindAsync()
+        public async Task<IEnumerable<ApplicationUser>> FindAsync([FromQuery] DtoPagination? pagination)
         {
-            return await _userRepository.FindAsync();
+            return await _userRepository.FindAsync(pagination);
         }
 
         [HttpGet("{id}")]

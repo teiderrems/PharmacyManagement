@@ -25,9 +25,9 @@ namespace PharmacyManagement.Controllers
         }
 
         [HttpGet]
-        public async Task<IList<Vente>> Get()
+        public async Task<IList<Vente>> Get([FromQuery] DtoPagination? pagination)
         {
-            return await _storeManager.FindAsync();
+            return await _storeManager.FindAsync(pagination);
         }
 
         [HttpGet]

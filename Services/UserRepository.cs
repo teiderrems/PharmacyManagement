@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PharmacyManagement.Data;
+using PharmacyManagement.DTO;
 using PharmacyManagement.Interfaces;
 using PharmacyManagement.Models;
 using System.Collections.Generic;
@@ -20,9 +21,19 @@ namespace PharmacyManagement.Services
         }
 
 
-        public async Task<IList<ApplicationUser>> FindAsync()
+        public async Task<IList<ApplicationUser>> FindAsync(DtoPagination? pagination)
         {
-            return await _context.Users.ToListAsync();
+            if (pagination == null)
+            {
+                pagination = new()
+                {
+                    Page = 1,
+                    Limit = 10,
+                };
+            }
+            int skip= pagination.Page * pagination.Limit;
+            return await _context.Users.Skip(skip).Take(pagination.Limit)
+                .ToListAsync();
         }
         
         public async Task<ApplicationUser> FindById(string id)
