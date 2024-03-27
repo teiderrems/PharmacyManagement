@@ -19,7 +19,7 @@ namespace PharmacyManagement.Controllers
 
 
         [HttpGet]
-        public async Task<IEnumerable<ApplicationUser>> FindAsync([FromQuery] DtoPagination? pagination)
+        public async Task<IEnumerable<DtoUser>> FindAsync([FromQuery] DtoPagination? pagination)
         {
             return await _userRepository.FindAsync(pagination);
         }

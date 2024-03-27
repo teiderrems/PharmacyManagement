@@ -5,7 +5,7 @@ namespace PharmacyManagement.Interfaces
 {
     public interface IUserRepository
     {
-        public Task<IList<ApplicationUser>> FindAsync(DtoPagination? pagination);
+        public Task<IList<DtoUser>> FindAsync(DtoPagination? pagination);
         public Task<ApplicationUser> FindById(string id);
 
         public Task<ApplicationUser> FindByUserName(string username);

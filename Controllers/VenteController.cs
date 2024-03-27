@@ -46,9 +46,8 @@ namespace PharmacyManagement.Controllers
             }
             try
             {
-                decimal totalPrice = getPrice(vente.products, vente.Quantity);
                 var user = await _context.Clients.FindAsync(vente.Owner);
-                Vente v = new() { Client = user!, Date = DateTime.Now, Title = vente.Title,TotalPrice=totalPrice};
+                Vente v = new() { Client = user!, Date = DateTime.Now, Title = vente.Title,TotalPrice=vente.price};
                 var vent = await _storeManager.CreateAsync(v);
                 for(int i = 0; i < vente.products.Count(); i++)
                 {
@@ -101,18 +100,6 @@ namespace PharmacyManagement.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
-
-        private decimal getPrice(List<int> p, List<int> q)
-        {
-           
-            decimal price = 0;
-            for (int i = 0; i < p.Count(); i++)
-            {
-                var prod= _context.Products.First(pr => pr.Id == p[i]);
-                price += prod.Price*q[i];
-            }
-            return price;
         }
     }
 }

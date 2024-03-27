@@ -16,6 +16,8 @@ namespace PharmacyManagement.Models
         [StringLength(150,MinimumLength =4)]
         public string LastName { get; set; } = String.Empty;
 
+        public string Address { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayName("Birth Day")]
         public DateTime BirthDay { get; set; }

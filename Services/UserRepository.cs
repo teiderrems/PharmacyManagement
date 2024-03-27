@@ -21,7 +21,7 @@ namespace PharmacyManagement.Services
         }
 
 
-        public async Task<IList<ApplicationUser>> FindAsync(DtoPagination? pagination)
+        public async Task<IList<DtoUser>> FindAsync(DtoPagination? pagination)
         {
             if (pagination == null)
             {
@@ -32,7 +32,7 @@ namespace PharmacyManagement.Services
                 };
             }
             int skip= pagination.Page * pagination.Limit;
-            return await _context.Users.Skip(skip).Take(pagination.Limit)
+            return await _context.Users.Select(u=>new DtoUser { Address=u.Address,UserName=u.UserName,FirstName=u.FirstName,BirthDay=u.BirthDay,PhoneNumber=u.PhoneNumber,Email=u.Email}).Skip(skip).Take(pagination.Limit)
                 .ToListAsync();
         }
         

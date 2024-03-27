@@ -1,5 +1,7 @@
 
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using PharmacyManagement.Data;
 using PharmacyManagement.Interfaces;
 using PharmacyManagement.Models;
@@ -45,6 +47,8 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+
+        app.UseAuthentication();
 
         app.UseAuthorization();
 
