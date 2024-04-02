@@ -24,8 +24,6 @@ namespace PharmacyManagement.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<ApplicationUser>()
-                .HasAlternateKey(u => new { u.FirstName, u.LastName });
 
             builder.Entity<CategorieProduct>()
                 .HasOne(p => p.Product)

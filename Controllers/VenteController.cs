@@ -51,7 +51,7 @@ namespace PharmacyManagement.Controllers
                 var vent = await _storeManager.CreateAsync(v);
                 for(int i = 0; i < vente.products.Count(); i++)
                 {
-                    _context.Add<VenteProduct>(new() { ProductId = vente.products[i], VenteId = vent.Id, Quantity = vente.Quantity[i]});
+                    _context.Add<VenteProduct>(new() { ProductId = vente.products[i], VenteId = vent.Id});
                 }
                 await _context.SaveChangesAsync();
                 return CreatedAtAction(nameof(Get), new { id = vent.Id }, vent);

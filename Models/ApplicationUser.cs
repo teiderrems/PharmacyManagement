@@ -11,12 +11,12 @@ namespace PharmacyManagement.Models
     {
 
         [StringLength(150, MinimumLength = 4)]
-        public string FirstName { get; set; }=String.Empty;
+        public string? FirstName { get; set; }
 
         [StringLength(150,MinimumLength =4)]
-        public string LastName { get; set; } = String.Empty;
+        public string? LastName { get; set; }
 
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayName("Birth Day")]
